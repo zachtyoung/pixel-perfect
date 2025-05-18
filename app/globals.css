@@ -78,15 +78,6 @@
   }
   body {
     @apply bg-background text-foreground overflow-x-hidden;
-    scroll-behavior: smooth;
-  }
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-  }
-  section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 }
 
