@@ -25,6 +25,8 @@ function ContactInfo({ icon, title, details, href }: ContactInfoProps) {
   return (
     <a 
       href={href} 
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex items-start gap-4 p-4 rounded-lg border bg-card/50 hover:bg-card transition-colors"
     >
       <div className="p-2.5 rounded-full bg-primary/10 text-primary">
@@ -55,9 +57,32 @@ export default function Contact() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    // Validate form
+    if (!formState.name || !formState.email || !formState.message) {
+      toast({
+        title: "Error",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formState.email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
     
     // Simulate form submission
     setTimeout(() => {
@@ -94,7 +119,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
-                    Full Name
+                    Full Name *
                   </label>
                   <Input
                     id="name"
@@ -107,7 +132,7 @@ export default function Contact() {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">
-                    Email Address
+                    Email Address *
                   </label>
                   <Input
                     id="email"
@@ -130,12 +155,11 @@ export default function Contact() {
                   placeholder="Project Inquiry"
                   value={formState.subject}
                   onChange={handleChange}
-                  required
                 />
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
-                  Message
+                  Message *
                 </label>
                 <Textarea
                   id="message"

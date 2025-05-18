@@ -16,6 +16,7 @@ const projects = [
     image: "https://images.pexels.com/photos/6956183/pexels-photo-6956183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "E-Commerce",
     tags: ["Next.js", "Stripe", "Tailwind CSS"],
+    link: "https://example.com/project1",
   },
   {
     title: "Corporate Website Redesign",
@@ -23,6 +24,7 @@ const projects = [
     image: "https://images.pexels.com/photos/5989933/pexels-photo-5989933.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "Web Design",
     tags: ["React", "Framer Motion", "TypeScript"],
+    link: "https://example.com/project2",
   },
   {
     title: "Healthcare Mobile Application",
@@ -30,6 +32,7 @@ const projects = [
     image: "https://images.pexels.com/photos/5417664/pexels-photo-5417664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "Mobile Apps",
     tags: ["React Native", "Firebase", "Redux"],
+    link: "https://example.com/project3",
   },
   {
     title: "SaaS Dashboard",
@@ -37,6 +40,7 @@ const projects = [
     image: "https://images.pexels.com/photos/5483071/pexels-photo-5483071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "Web Design",
     tags: ["Vue.js", "D3.js", "Tailwind"],
+    link: "https://example.com/project4",
   },
   {
     title: "Fitness Brand Identity",
@@ -44,6 +48,7 @@ const projects = [
     image: "https://images.pexels.com/photos/4397841/pexels-photo-4397841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "Branding",
     tags: ["Figma", "Illustrator", "Web Design"],
+    link: "https://example.com/project5",
   },
   {
     title: "Food Delivery App",
@@ -51,6 +56,7 @@ const projects = [
     image: "https://images.pexels.com/photos/5053848/pexels-photo-5053848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "Mobile Apps",
     tags: ["Flutter", "Node.js", "Google Maps API"],
+    link: "https://example.com/project6",
   },
 ];
 
@@ -140,13 +146,19 @@ export default function Portfolio() {
                       </Badge>
                     ))}
                   </div>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  <a 
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -154,7 +166,11 @@ export default function Portfolio() {
         </div>
         
         <div className="flex justify-center mt-12">
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => setActiveCategory("All")}
+          >
             View All Projects
             <ArrowUpRight className="ml-2 h-4 w-4" />
           </Button>

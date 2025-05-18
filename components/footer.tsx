@@ -4,6 +4,19 @@ import { Input } from "@/components/ui/input";
 import { Code, Github, Twitter, Linkedin, Instagram } from "lucide-react";
 
 export default function Footer() {
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add your newsletter subscription logic here
+    const form = e.target as HTMLFormElement;
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+    
+    if (email) {
+      // Simulate subscription success
+      alert('Thank you for subscribing!');
+      (form.elements.namedItem('email') as HTMLInputElement).value = '';
+    }
+  };
+
   return (
     <footer className="bg-muted/50 border-t pt-16 pb-8">
       <div className="container grid gap-8 px-4 md:grid-cols-2 lg:grid-cols-4">
@@ -17,19 +30,19 @@ export default function Footer() {
             We build websites that work for your business.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               <Twitter className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               <Instagram className="h-5 w-5" />
               <span className="sr-only">Instagram</span>
             </Link>
@@ -41,7 +54,7 @@ export default function Footer() {
           <ul className="space-y-3">
             {["Web Development", "UI/UX Design", "E-Commerce", "Mobile Apps", "SEO Optimization"].map((item) => (
               <li key={item}>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {item}
                 </Link>
               </li>
@@ -52,10 +65,17 @@ export default function Footer() {
         <div>
           <h3 className="font-medium text-sm mb-4">Resources</h3>
           <ul className="space-y-3">
-            {["Blog", "Case Studies", "Documentation", "Help Center", "Privacy Policy", "Terms of Service"].map((item) => (
-              <li key={item}>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {item}
+            {[
+              { label: "Blog", href: "/blog" },
+              { label: "Case Studies", href: "/case-studies" },
+              { label: "Documentation", href: "/docs" },
+              { label: "Help Center", href: "/help" },
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms of Service", href: "/terms" }
+            ].map((item) => (
+              <li key={item.label}>
+                <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {item.label}
                 </Link>
               </li>
             ))}
@@ -67,16 +87,18 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground mb-4">
             Subscribe to our newsletter to get the latest updates.
           </p>
-          <div className="flex gap-2">
+          <form onSubmit={handleSubscribe} className="flex gap-2">
             <Input
               type="email"
+              name="email"
               placeholder="Email address"
               className="max-w-[240px]"
+              required
             />
             <Button size="sm" type="submit">
               Subscribe
             </Button>
-          </div>
+          </form>
           <p className="text-xs text-muted-foreground mt-4">
             By subscribing, you agree to our Terms of Service and Privacy Policy.
           </p>
@@ -89,13 +111,18 @@ export default function Footer() {
             © {new Date().getFullYear()} PixelPerfect. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Privacy", "Terms", "Cookies", "Contact"].map((item) => (
+            {[
+              { label: "Privacy", href: "/privacy" },
+              { label: "Terms", href: "/terms" },
+              { label: "Cookies", href: "/cookies" },
+              { label: "Contact", href: "#contact" }
+            ].map((item) => (
               <Link 
-                key={item} 
-                href="#" 
+                key={item.label} 
+                href={item.href} 
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </div>

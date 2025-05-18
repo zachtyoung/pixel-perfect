@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Sparkles, Zap } from "lucide-react";
-import Link from "next/link";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,6 +34,22 @@ export default function Hero() {
       }
     };
   }, []);
+
+  const scrollToContact = () => {
+    const contact = document.querySelector("#contact");
+    if (contact) {
+      const offset = contact.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: offset });
+    }
+  };
+
+  const scrollToPortfolio = () => {
+    const portfolio = document.querySelector("#portfolio");
+    if (portfolio) {
+      const offset = portfolio.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: offset });
+    }
+  };
   
   return (
     <section 
@@ -64,11 +79,11 @@ export default function Hero() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-20">
-          <Button size="lg" className="group animate-fade-in">
+          <Button size="lg" className="group animate-fade-in" onClick={scrollToContact}>
             <span>Start a Project</span>
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button size="lg" variant="outline" className="animate-fade-in delay-100">
+          <Button size="lg" variant="outline" className="animate-fade-in delay-100" onClick={scrollToPortfolio}>
             View Our Work
           </Button>
         </div>

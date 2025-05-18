@@ -29,6 +29,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (href?.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        const offset = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: offset });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={cn(
@@ -47,12 +60,12 @@ export default function Navbar() {
           <span className="hidden sm:inline">PixelPerfect</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
+              onClick={handleNavClick}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {item.name}
@@ -62,7 +75,17 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Button size="sm" className="hidden md:inline-flex">
+          <Button 
+            size="sm" 
+            className="hidden md:inline-flex"
+            onClick={() => {
+              const contact = document.querySelector("#contact");
+              if (contact) {
+                const offset = contact.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top: offset });
+              }
+            }}
+          >
             Get Started
           </Button>
           <Button
@@ -80,7 +103,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-sm border-b">
           <nav className="container flex flex-col py-4">
@@ -88,13 +110,24 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={handleNavClick}
                 className="py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <Button size="sm" className="mt-4">
+            <Button 
+              size="sm" 
+              className="mt-4"
+              onClick={() => {
+                const contact = document.querySelector("#contact");
+                if (contact) {
+                  const offset = contact.getBoundingClientRect().top + window.scrollY;
+                  window.scrollTo({ top: offset });
+                }
+                setIsMobileMenuOpen(false);
+              }}
+            >
               Get Started
             </Button>
           </nav>
