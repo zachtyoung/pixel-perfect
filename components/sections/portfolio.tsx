@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const categories = ["All", "Web Design", "E-Commerce", "Mobile Apps", "Branding"];
 
@@ -146,7 +147,7 @@ export default function Portfolio() {
                       </Badge>
                     ))}
                   </div>
-                  <a 
+                  <Link
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -158,7 +159,7 @@ export default function Portfolio() {
                     >
                       <ArrowUpRight className="h-4 w-4" />
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,18 +1,12 @@
 "use client";
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  ArrowRight, 
-  Check 
-} from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface ContactInfoProps {
   icon: React.ReactNode;
@@ -23,7 +17,7 @@ interface ContactInfoProps {
 
 function ContactInfo({ icon, title, details, href }: ContactInfoProps) {
   return (
-    <a 
+    <Link
       href={href} 
       target="_blank"
       rel="noopener noreferrer"
@@ -36,7 +30,7 @@ function ContactInfo({ icon, title, details, href }: ContactInfoProps) {
         <h3 className="font-medium mb-1">{title}</h3>
         <p className="text-sm text-muted-foreground">{details}</p>
       </div>
-    </a>
+    </Link>
   );
 }
 
